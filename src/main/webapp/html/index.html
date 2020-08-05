@@ -1,0 +1,123 @@
+﻿<!DOCTYPE html>
+<head>
+    <title>西北大学社团</title>
+    <meta charset="UTF-8">
+    <link href="../css/main.css" rel="stylesheet" type="text/css" />
+    <script src="../js/jquery.min.js"></script>
+    <script src="../js/jquery.cookie.js"></script>
+</head>
+
+<body>
+
+<div class="top">
+    <ul>
+        <li><input type="text" placeholder="请输入..." name="" id="" value="" /></li>
+        <li><button>搜索</button></li>
+        <li class="nologin"><a href="login.html" style="text-decoration:none">登录</a></li>
+        <li class="logined" style="display: none">
+            <a href="homepage.html" class="name">用户名</a>
+            <ul>
+                <li><a href="change.html">修改密码</a></li>
+                <li><a href="/cm/logout">退出登录</a></li>
+            </ul>
+        </li>
+    </ul>
+</div>
+
+<div class="home">
+        <p>社团分类</p>
+</div>
+<div class="list_body">
+        <div class="touch">
+            <div class="eg">
+            <img alt="" src="../image/s_1.png"/>
+            <h2>&nbsp;&nbsp; 学术科技</h2>
+            <table border="0" class="class1">
+            </table>
+            </div>
+            <div class="line"></div>
+        </div>
+    <div class="touch">
+        <div class="eg">
+            <img alt="" src="../image/s_4.png"  />
+            <h2>&nbsp;&nbsp; 服务实践</h2>
+            <table border="0" class="class2">
+<!--                <tr><th><a href="club">环保协会</a></th></tr>-->
+<!--                <tr><th><a href="club">尊老协会</a></th></tr>-->
+<!--                <tr><th><a href="club">流浪小动物救助协会</a></th></tr>-->
+            </table>
+        </div>
+        <div class="line"></div>
+     </div>
+        <div class="touch">
+        <div class="eg">
+        <img alt="" src="../image/s_2.png" />
+            <h2>&nbsp;&nbsp; 体育竞技</h2>
+            <table border="0" class="class3">
+            </table>
+            </div>
+            <div class="line"></div>
+        </div>
+    <div class="touch">
+        <div class="eg">
+        <img alt="" src="../image/s_3.png"  />
+        <h2>&nbsp;&nbsp; 人文政治</h2>
+            <table border="0" class="class4">
+            </table>
+            </div>
+            <div class="line"></div>
+        </div>
+        <div class="touch">
+        <div class="eg">
+            <img alt="" src="../image/s_5.png" />
+            <h2>&nbsp;&nbsp 文化艺术</h2>
+            <table border="0" class="class5">
+            </table>
+            </div>
+            <div class="line"></div>
+        </div>
+    </div>
+
+    <div class="tail">
+        <div class="phonenum">
+            <h5>社团电话:(周一至周五 9：00-18：00)</h5>
+            <br />
+            <h3>000-000-0000</h3>
+            <br />
+            <div class="copyright">
+            <h4>@西北大学社团管理</h4>
+        </div>
+        </div>
+    </div>
+<script>
+    $(function () {
+        for(var i=1; i<=5; i++){
+            $.ajax({
+                url:"/cm/community/getCommunities",
+                type:"GET",
+                data:{
+                    ctype:i
+                },
+                async:false,
+                success:function (data) {
+                    var className = ".class"+i;
+                    var childs = className+" tr";
+                    $(childs).remove();
+
+                    $.each(data,function (i,o) {
+                        var tr = "<tr><th><a href=\"community_detail.html?cid="+o.cid+"\">"+o.cname+"</a></th></tr>"
+                        $(className).append(tr);
+                    })
+                }
+            })
+        }
+
+        if($.cookie("identity")!=null){
+            $(".nologin").css("display","none");
+            $(".logined").css("display","list-item");
+            $(".name").html($.cookie("name"))
+        }
+    })
+</script>
+</body>
+</html>

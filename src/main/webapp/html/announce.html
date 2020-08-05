@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="../layui/css/layui.css">
+    <script src="../layui/layui.js"></script>
+    <script src="../js/jquery.min.js"></script>
+    <script src="../js/util.js"></script>
+    <script src="../js/jquery.cookie.js"></script>
+</head>
+<body>
+    <h2 style="text-align: center">发布公告信息</h2>
+    <form class="layui-form" action="" style="margin:20px auto 20px; width: 80%;" >
+        <div class="layui-form-item">
+            <label class="layui-form-label">公告标题</label>
+            <div class="layui-input-block">
+                <input type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入标题" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item layui-form-text">
+            <label class="layui-form-label">公告内容</label>
+            <div class="layui-input-block">
+                <textarea placeholder="请输入内容" class="layui-textarea" rows="10" name="text"></textarea>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <button type="submit" class="layui-btn" lay-submit="" lay-filter="announce">立即提交</button>
+                <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+            </div>
+        </div>
+    </form>
+
+    <script>
+        layui.use(['form'], function(){
+            var form = layui.form;
+            form.on('submit(announce)', function(data){
+                console.log(data.field);
+                var postdata = data.field;
+                postdata.cid = $.cookie("cid");
+                $.ajax({
+                    url:"/cm/notice/add",
+                    data:postdata,
+                    type:"POST",
+                    success:function (data) {
+                        console.log(data);
+                        if(data.message === "success") {
+                            alert("发布成功");
+                            location.reload();
+                        }else
+                            alert("发布失败，请重新发布")
+                    }
+                });
+                return false;
+            });
+
+        });
+
+    </script>
+</body>
+</html>

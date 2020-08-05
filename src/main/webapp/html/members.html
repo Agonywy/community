@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link type="text/css" rel="stylesheet" href="../layui/css/layui.css">
+    <script src="../js/util.js"></script>
+    <script src="../js/jquery.min.js"></script>
+    <script src="../js/jquery.cookie.js"></script>
+</head>
+<body>
+<table class="layui-table">
+    <colgroup>
+        <col width="20%">
+        <col width="20%">
+        <col width="20%">
+        <col width="20%">
+        <col width="20%">
+    </colgroup>
+    <thead>
+    <tr>
+        <th>姓名</th>
+        <th>联系电话</th>
+        <th>邮箱</th>
+        <th>职务</th>
+        <th>操作</th>
+    </tr>
+    </thead>
+    <tbody>
+    </tbody>
+</table>
+
+<script>
+    $(function () {
+        function flush(){
+            $.ajax({
+                url:"/cm/community_admin/getMembers",
+                type:"GET",
+                async:false,
+                data:{
+                    cid:$.cookie("cid")
+                },
+                success:function (data) {
+                    $(".layui-table tbody tr").remove();
+                    var table = $(".layui-table tbody");
+                    $.each(data, function (i,o) {
+                        var tr = "<tr><td>"+o.sname+"</td><td>"+o.tele+"</td><td>"+o.email+"</td><td>成员</td><td><button type=\"button\" class=\"layui-btn layui-btn-warm\" student-id='"+o.sid+"'><i class=\"layui-icon layui-icon-delete\"></i>删除</button></td></tr>"
+                        table.append(tr);
+                    });
+
+                    $(".layui-btn-warm").click(function () {
+                        var sid = this.getAttribute("student-id");
+                        $.ajax({
+                            url:"/cm/community_admin/deleteMember",
+                            type:"POST",
+                            async:false,
+                            data:{
+                                cid:$.cookie("cid"),
+                                sid:sid
+                            },
+                            success:function () {
+                                flush();
+                            }
+                        })
+                    });
+                }
+            })
+        }
+        flush();
+    });
+</script>
+</body>
+</html>

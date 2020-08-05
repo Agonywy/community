@@ -1,0 +1,116 @@
+﻿#admin_login_body{
+    background-color: #f1f1f1;
+    font-family: 黑体;
+    background-image: url("../image/admin_login.jpg")
+}
+#login_body{
+    background-color: #f1f1f1;
+    font-family: 黑体;
+}
+.cen{
+    margin:40px auto 0 auto;
+    height:385px;
+    width:400px;
+    background-color:white;
+}
+.log{
+    border-style: none;
+    height:35px;
+    width:304px;
+    margin: 0 0 10px 50px;
+    background-color: #F1F1F1;
+    font-size:22px
+}
+#denglu{
+    padding:7px;
+    margin-left:275px;
+    border-style: none;
+    font-size: 20px;
+    color: #FFFFFF;
+    background-color: #097EAD;
+    font-family: 黑体;
+    width: 81px;
+}
+.font1{
+    font-family: Verdana;
+    color: #097EAD;
+    width: 140px;
+    font-size: 35px;
+    margin: 0 auto;
+}
+.font2{
+    color: #A4A5AE;
+    font-size: 15px;
+    margin:10px 0 0 30px ;
+}
+.font3{
+    color: #A4A5AE;
+    font-size: 17px;
+    margin:10px 0 0 50px ;
+}
+.form1 {
+    margin: 20px auto;
+    height: 500px;
+    width: 447px;
+    background-color: white;
+}
+.form2 {
+    margin: 20px auto;
+    height: 500px;
+    width: 447px;
+    background-color: white;
+}
+.log1{
+    height: 29px;
+    width: 230px;
+    font-size: 20px;
+    border-style: none;
+    margin-left: 30px;
+    margin-right: 0;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    background-color: #F1F1F1;
+}
+.log2{
+    border-style: none;
+    height:150px;
+    width:380px;
+    margin-left:30px;
+    margin-top:10px;
+    font-size: 15px;
+    background-color: #F1F1F1;
+    color: #201e1e;
+}
+.log3{
+    padding:5px;
+    margin:20px 0 0 20px;
+    border-style: none;
+    font-size: 20px;
+    color: #FFFFFF;
+    background-color: #097EAD;
+    font-family: 黑体;
+    width: 81px;
+}
+.log4{
+    height: 40px;
+    width:327px;
+    font-size: 28px;
+    border-style: none;
+    margin-left: 50px;
+    margin-right: 0;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    background-color: #F1F1F1;
+}
+.butt{
+    float:left;
+}
+.cancel{
+    border-style:none;
+    padding:6px;
+    font-size:20px;
+    font-family:黑体;
+    margin-left:230px;
+    width:81px;
+    height: 40px;
+}

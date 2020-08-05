@@ -1,0 +1,82 @@
+﻿<!DOCTYPE html>
+<head>
+    <title>修改密码</title>
+<link href="../css/logs.css" rel="stylesheet" type="text/css" />
+    <script src="../js/jquery.min.js"></script>
+    <script src="../js/jquery.cookie.js"></script>
+
+    <style>
+        .backgroundImage{
+            background-image: url("../image/change.jpg");
+        }
+    </style>
+</head>
+<!--
+修改密码 旧密码匹配 允许修改为新密码
+-->
+<body id="login_body" class="backgroundImage">
+
+
+
+    <div style="height: 90px; width: 352px; margin:100px auto 5px">
+    <h1 class="font1" >密码设置</h1>
+    </div>
+    <form class="form1" style="height:420px;width:461px" action="" method="post">
+       
+   <br/>
+        <p class="font3">旧密码</p>
+            <input class="log4" id="oldPassword" type="password"  />
+          
+            <p class="font3">新密码</p>
+            
+            <input class="log4" id="newPassword" type="password" />
+            <br />
+            <p class="font3">确认新密码</p>
+            <input class="log4" id="definePassword" type="password"   />
+            <div class="butt">
+            <!--取消按钮 转跳到前一页面-->
+<!--            <a href="my_club.html">-->
+                <input type="reset" class="cancel" value="重置"/>
+<!--                </a>-->
+            <!--确认按钮 提交数据之后 转跳到前一页面-->
+            <input class="log3" type="submit" id="define" value="确认" />
+            </div>
+    </form>
+    <script>
+        $(function () {
+            $("#define").click(function () {
+                var oldPassword = $("#oldPassword").val();
+                var newPassword = $("#newPassword").val();
+                var definePassword = $("#definePassword").val();
+                if(oldPassword == ""||newPassword ==""||definePassword==""){
+                    alert("密码不能为空");
+                }else if(newPassword !=definePassword){
+                    alert("密码不一致,请重新输入");
+                }else{
+                    $.ajax({
+                        url: "/cm/student/setNewPassword",
+                        data: {
+                            sid:$.cookie("sid"),
+                            oldPassword:oldPassword,
+                            newPassword:newPassword
+                        },
+                        type: "POST",
+                        dataType: "json",
+                        async:false,
+                        success: function(data) {
+                            if(data.message == "success"){
+                                alert("密码修改成功");
+                                window.location.href = "/cm/logout";
+                            }else{
+                                alert("旧密码错误,请重新输入");
+                            }
+                        }
+                    });
+                }
+                return false;
+            });
+        });
+
+    </script>
+</body>
+</html>

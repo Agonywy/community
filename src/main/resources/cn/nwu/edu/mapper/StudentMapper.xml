@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="cn.nwu.edu.mapper.StudentMapper">
+
+
+    <select id="selectStudent" resultType="cn.nwu.edu.entity.Student">
+        select * from student where sid = #{sid}
+    </select>
+    <select id="selectCommunity" resultType="java.util.HashMap">
+        select community.cname,community_type.ctname,community.cid
+        from community,community_type,student_community
+        where student_community.sid = #{sid} and student_community.cid = community.cid
+        and community.ctid = community_type.ctid
+    </select>
+    <select id="selectMessage" resultType="java.util.HashMap">
+        select application.status,application.type,community.cname from application,community
+        where application.sid = #{sid} and application.cid = community.cid
+    </select>
+
+    <update id="setNewPassword">
+        update student set password = #{newPassword} where sid = #{sid}
+    </update>
+
+</mapper>

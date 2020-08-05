@@ -1,0 +1,54 @@
+﻿<!DOCTYPE html>
+<head>
+    <title>退社申请</title>
+    <link href="../css/logs.css" rel="stylesheet" type="text/css" />
+    <script src="../js/jquery.min.js"></script>
+    <script src="../js/jquery.cookie.js"></script>
+    <script src="../js/util.js"></script>
+</head>
+
+<body id="login_body">  
+    <h1 class="font1" style="margin: 150px auto 0;">退社申请</h1>
+    <form class="form2" style="height:350px">
+            <input type="hidden" class="type" value="1"/>
+            <br/><br/>
+            <p class="font2">退社理由(不得少于150字)</p>
+            <textarea class="log2" ></textarea>
+            <div class="butt">
+            <!--
+            取消按钮 转跳到前一页面 即我的社团(个人主页)
+            确认按钮 提示已提交，提交数据转跳到前一页面
+                            修改 社团详情页 状态信息
+            -->
+            <a href="my_club.html"><input type="button" class="cancel" value="取消"/></a>
+            <input class="log3" type="submit" value="确认" />
+            </div>
+    </form>
+    <script>
+        $(function () {
+            $(".log3").click(function () {
+                $.ajax({
+                    url: "/cm/application/add",
+                    type:"POST",
+                    data:{
+                        sid:$.cookie("sid"),
+                        cid:getParams("cid"),
+                        reason:$(".log2").val(),
+                        type:$(".type").val()
+                    },
+                    success:function (data) {
+                        if(data.message == "success"){
+                            alert("提交成功");
+                            window.location.href = "index.html";
+                        }else{
+                            alert("提交失败");
+                            window.location.href = "quit.html?cid="+getParams("cid");
+                        }
+                    }
+                });
+                return false;
+            })
+        })
+    </script>
+</body>
+</html>

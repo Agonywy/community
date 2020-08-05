@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.nwu.edu.mapper.CommunityMapper">
+    <select id="queryById" resultType="cn.nwu.edu.entity.Community">
+        select * from community where cid = #{cid}
+    </select>
+
+    <select id="queryAllCommunityType" resultType="java.lang.String">
+        select ctname from community_type
+    </select>
+
+    <select id="queryAllCommunityInfo" resultType="java.util.HashMap">
+        select cname, principal, ctname, createtime, community.cid from
+        community left join community_admin ca on community.cid = ca.cid
+        left join community_type ct on community.ctid = ct.ctid
+    </select>
+
+    <select id="queryNumberOfMember" resultType="java.lang.Integer">
+        select count(*) from student_community where cid=#{cid}
+    </select>
+    <select id="queryCommunitiesByCtype" resultType="cn.nwu.edu.entity.Community">
+        select * from community where ctid=#{ctid}
+    </select>
+</mapper>

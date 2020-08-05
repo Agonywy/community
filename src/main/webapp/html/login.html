@@ -1,0 +1,79 @@
+﻿<!DOCTYPE html>
+<head>
+    <title>登录</title>
+    <link href="../css/logs_modify.css" rel="stylesheet" type="text/css" />
+    <script src="../js/jquery.min.js"></script>
+    <style rel="stylesheet" type="text/css">
+        *{
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+</head>
+
+<body id="login_body" style='background-image: url("../image/login_background.png");background-size: 100%;background-position: 0px -100px;'>
+    <div style="height: 120px; width: 120px;margin:100px auto 25px">
+    <img src="../image/logo.png" style="height: 120px; width: 120px;"/>
+    </div>
+    <form class="cen">
+<!--        <div style="color: firebrick;display: none;" class="feedback">用户名或密码错误</div>-->
+        <div style="color: #666666;" class="login-form">
+            <br/><br/>
+            <p style="color: rgb(255, 85, 63); font-size: 20px; margin-left: 48px; display: none;" class="message">用户名或密码错误</p>
+            <p style="color: #A4A5AE; font-size: 20px;margin-left:48px">请输入用户名</p>
+            <input class="log username" type="text" />
+            <br />
+            <p style="color: #A4A5AE; font-size: 20px;margin-left:48px">请输入密码</p>
+            <input class="log password" type="password" />
+            <br />
+<!--
+    check框选定身份
+-->
+            <div style="margin-left:48px">
+                <input type="radio" name="identity" value="student" checked class="identity"/>学生
+                <input type="radio" name="identity" value="manager" class="identity"/>社团管理员
+                <br />
+            </div>
+<!--
+    登录按钮 按身份转跳
+    [学生身份]主页和社团详情页都有登录入口，
+    点击登录可能返回到主页或详情页，得取上一页的地址转跳
+    [社团管理员身份]转跳到管理社团页面
+-->
+            <input type="submit" value="登录" id="denglu" class="login" />
+
+<!--            <br /><a href="index.html">测试跳学生</a>-->
+<!--            <a href="manage.html">测试跳管理员</a>-->
+<!--&lt;!&ndash;不同身份转跳实现之后删除&ndash;&gt;-->
+        </div>
+    </form>
+    <script>
+        $(".login").click(function () {
+            var username = $(".username").val();
+            var password = $(".password").val();
+            var identify = $('input:radio:checked').val();
+            $.ajax({
+                url:"/cm/login",
+                data:{
+                    username:username,
+                    password:password,
+                    identify:identify
+                },
+                type:"POST",
+                success:function (data) {
+                    if(data.message == "success" ){
+                        alert("登录成功");
+                        if(data.identity == "student"){
+                            window.location.href = "/cm/html/homepage.html";
+                        }else if(data.identity == "manager")
+                            window.location.href = "/cm/html/caindex.html";
+                    }else{
+                        $(".message").css("display","block");
+                    }
+                }
+            })
+            return false;
+        })
+    </script>
+</body>
+</html>

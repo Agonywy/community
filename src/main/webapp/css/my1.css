@@ -1,0 +1,139 @@
+*{
+    margin:0;
+    padding:0;
+    /*background-color: #f1f1f1;*/
+}
+.top{
+    height:10px;
+    color:#808080;
+    background:#fafafa;
+    padding:10px 40px 20px 0;
+    font-size:15px;
+    text-align:right;
+    border-bottom: 1px solid #808080;
+}
+.top ul{
+    list-style-type:none;
+    width:450px;
+    float:right;
+    overflow:hidden;
+}
+.top li{
+    float: right;
+}
+.top li a{
+    color:#000;
+    text-decoration:none;
+}
+.top li ul{
+    overflow:hidden;
+    position:absolute;
+    right: 15px;
+    z-index:10;
+    width:60px;
+    padding: 0 25px;
+    background: #f1f1f1;
+    display:none;
+}
+.top li ul li{
+    padding-top:15px;
+}
+.top ul li:hover ul{
+    float:none;
+    display: block;
+}
+
+.main{
+    border-radius: 20px 20px 0 0;
+    width: 80%;
+    margin: 0 10%;
+    padding-top:170px;
+    background-image:url(../image/back2.png);
+    background-repeat:repeat-x;
+}
+.mid{
+    margin-top:-20px;
+    height: 230px;
+    position: relative;
+    border-radius:0 0 20px 20px;
+    background-color: rgba(255,255,255,0.5);
+    box-shadow: 3px 3px 3px #666;
+}
+.my{
+    padding:30px;
+    margin: 5px 0 0 40px ;
+    background-color:rgba(255,255,255,0.8);
+    border-radius: 30px;
+}
+.change{
+    position:absolute;
+    top: 170px;
+    right: 40px;
+    color: #ffffff;
+    background-color: cornflowerblue;
+    width: 100px;
+    height: 30px;
+    border: none;
+    border-radius: 10px;
+}
+.quit{
+    color: #ffffff;
+    background-color: #154B8D;
+    width: 60px;
+    height: 25px;
+    border: none;
+    border-radius: 10px;
+}
+.bottom{
+    background-color: #ffffff;
+    position: relative;
+    border-radius: 10px;
+}
+.community{
+    border-radius: 30px;
+    margin: 15px 0;
+    background-color: #ffffff;
+    width: 49%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    box-shadow: 3px 3px 3px #666;
+}
+.notice{
+    border-radius: 30px;
+    margin: 15px 0;
+    background-color: #ffffff;
+    width: 49%;
+    position: absolute;
+    top: 0;
+    right: 0;
+    box-shadow: 3px 3px 3px #666;
+}
+.table{
+    background-color: #ffffff;
+    width: 100%;
+    text-align: center;
+    
+    padding: 15px 0;
+}
+h2{
+    background-color: #ffffff;
+    margin: 15px 30px 0 30px;
+    text-align: left;
+    border-bottom: 1px solid #154B8D;
+    padding: 10px 0;
+}
+th{
+    background-color: #ffffff;
+}
+td{
+    background-color: #ffffff;
+    padding: 5px 0;
+}
+table{
+    margin-top:50px;
+    border-radius: 30px;
+}
+.logo{
+    margin: 30px;
+}

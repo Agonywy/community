@@ -1,0 +1,83 @@
+body{
+    max-width: 70%;
+    margin: 30px 15% 0 15%;
+}
+
+.strip1{
+    margin-bottom: 10px;
+    height: 70px;
+}
+
+.logo{
+    margin-right: 3%;
+}
+
+.span2{
+    max-width: 60%;
+    float: left;
+    margin: 0 5% 0 0;
+}
+
+.block{
+    position: relative;
+}
+
+.span3{
+    max-width: 35%;
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 0 0 0 5%;
+}
+
+.ctype{
+    font-size: 35px;
+    color: red;
+    letter-spacing: 0.2em;
+    font-family: 黑体;
+}
+.titles{
+    font-size: 20px;
+    color: red;
+    width: 100%;
+    border-bottom: 2px solid red;
+    letter-spacing: 0.15em;
+}
+
+.number{
+    float: right;
+    margin-top: 35px;
+}
+
+.subject{
+    padding: 0 0 15px 0;
+}
+
+.text{
+    color: gray;
+    margin: 10px;
+    font-size: 20px;
+    letter-spacing: 0.15em;
+}
+
+.notice{
+    color: mediumturquoise;
+    margin: 10px;
+    font-size: 20px;
+    letter-spacing: 0.15em;
+    border-bottom: solid 1px red;
+}
+
+.strip2{
+    width: 100%;
+}
+
+input{
+    width: 100px;
+    height: 50px;
+    margin-top: 19px;
+    background-color: #fff;
+    float: right;
+    color: blue;
+    border: solid 1px blue;
+}

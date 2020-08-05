@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.nwu.edu.mapper.LoginMapper">
+
+    <select id="queryStudentBySid" resultType="cn.nwu.edu.entity.Student">
+        select * from student where sid=#{sid}
+    </select>
+    <select id="queryWebsiteAdminByWid" resultType="cn.nwu.edu.entity.WebsiteAdmin">
+        select * from website_admin where wid=#{wid}
+    </select>
+    <select id="queryCommunityAdminByCaid" resultType="cn.nwu.edu.entity.CommunityAdmin">
+        select * from community_admin where caid=#{caid}
+    </select>
+</mapper>

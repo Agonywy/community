@@ -1,0 +1,55 @@
+﻿<!DOCTYPE html>
+<head>
+    <title>网站管理员登录</title>
+<link href="../css/logs.css" rel="stylesheet" type="text/css" />
+    <script src="../js/jquery.min.js"></script>
+    <script src="../js/jquery.cookie.js"></script>
+</head>
+
+<body id="admin_login_body">
+    <div style="height: 90px; width: 352px; margin:100px auto 5px">
+        <img src="../image/login.png"/>
+
+    </div>
+    <form class="cen">
+        <div style="color: #666666;">
+            <br/>
+            <h1 style="font-family: Verdana; color: #097EAD; width: 100%; text-align: center;font-size: 25px;">欢迎登录</h1>
+            <p style="color: #A4A5AE;font-size: 20px;margin-left:48px">账户</p>
+            <input class="log" type="text" />
+            <br />
+            <p style="color: #A4A5AE;font-size: 20px;margin-left:48px">密码</p>
+            <input class="log" type="password" />
+            <br /><br />
+            <input style="font-size: 20px" type="submit" value="登录" id="denglu" />
+            <!--登录成功转跳到administer-->
+            <br />
+        </div>
+    </form>
+    <script>
+        $(".login").click(function () {
+            var username = $(".username").val();
+            var password = $(".password").val();
+            var identify = $(".identify").val();
+
+            $.ajax({
+                url:"/cm/login",
+                type:"POST",
+                data:{
+                    username:username,
+                    password:password,
+                    identify:identify
+                },
+                success:function (data) {
+                    if(data.message == "success"){
+                        window.location.href = "index.html";
+                    }else{
+                        alert("账号或者密码错误");
+                    }
+                }
+            })
+            return false;
+        })
+    </script>
+</body>
+</html>

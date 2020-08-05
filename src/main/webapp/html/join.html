@@ -1,0 +1,62 @@
+﻿<!DOCTYPE html>
+<head>
+    <title>社团申请</title>
+    <link href="../css/logs.css" rel="stylesheet" type="text/css" />
+    <meta charset="UTF-8">
+    <script src="../js/jquery.min.js"></script>
+    <script src="../js/jquery.cookie.js"></script>
+    <script src="../js/util.js"></script>
+</head>
+
+<body id="login_body"> 
+    <h1 class="font1">社团申请</h1>  
+    <form class="form1">
+            <br /><br />
+            <p class="font2" style="margin-top:20px">手机号</p>
+            <input class="log1 tele" type="text" name="tele"/>
+
+            <p class="font2">邮箱</p>
+            <input class="log1 email" type="text" name="email"/>
+
+            <p class="font2" style="margin-top:10px">申请理由</p>
+            <textarea class="log2 reason" name="reason"></textarea>
+            <input type="hidden" value="0" class="type"/>
+        <div class="butt">
+            <!--
+            取消按钮 转跳到前一页面 即社团详情页
+            确认按钮 提示已提交，提交数据 转跳到前一页面
+            修改 我的社团页 (个人主页)状态信息
+            -->
+            <a href="club.html"><input type="button" class="cancel" value="取消"/></a>
+            <input class="log3" type="submit" value="确认" />  
+        </div>   
+    </form>
+
+    <script>
+        $(".log3").click(function(){
+            $.ajax({
+                url:"/cm/application/add",
+                type:"POST",
+                async:false,
+                data:{
+                    sid:$.cookie("sid"),
+                    cid:getParams("cid"),
+                    tele:$(".tele").val(),
+                    reason:$(".reason").val(),
+                    email:$(".email").val(),
+                    type: $(".type").val()
+                },
+                success:function (data) {
+                    if(data.message == "success"){
+                        alert("提交成功");
+                        window.location.href = "/cm/html/index.html";
+                    }else{
+                        alert("提交失败");
+                    }
+                }
+            });
+            return false;
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,152 @@
+﻿<html>
+    <head>
+        <link href="../css/my1.css" rel="stylesheet" type="text/css" />
+        <meta charset="UTF-8">
+        <script src="../js/jquery.min.js"></script>
+        <script src="../js/jquery.cookie.js"></script>
+    </head>
+
+    <body>
+        <div class="top">
+            <ul>
+                <li>
+                    <a href="#">个人中心</a>
+
+                    <ul><!--原本网页的条目保留 不要直接改成下面这样-->
+                        <li><a href="change.html">修改密码</a></li>
+                        <li><a href="/cm/logout">退出登录</a></li>
+                    </ul>
+                </li>
+                <li style="margin: 0 10px;"><a href="index.html">首页</a></li>
+            </ul>
+        </div>
+
+       <div class="main">
+            <div class="mid">
+	<br />
+                <table class="my">
+                    <tr>
+                        <th>姓名：</th>
+                        <td class="sname"></td>
+                    </tr>
+                    <tr>
+                        <th>学号：</th>
+                        <td class="sid"></td>
+                    </tr>
+                    <tr>
+                        <th>电话：</th>
+                        <td class="tele"></td>
+                    </tr>
+                    <tr>
+                        <th>邮箱：</th>
+                        <td class="email"></td>
+                    </tr>
+                </table>
+                <button class="change">修改个人资料(待完成)</button>
+            </div>
+    
+            <div class="bottom">
+                <div class="community">
+                    <h2>社团信息</h2>
+                    <table class="table commubity">
+                        <thead>
+                            <tr>
+                                <th>社团名称</th>
+                                <th>社团类型</th>
+                                <th>申请操作</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                    </table>
+                </div>
+
+                <div class="notice">
+                    <h2>申请状态</h2>
+                    <table class="table application">
+                        <thead>
+                            <tr>
+                                <th>社团名称</th>
+                                <th>申请类型</th>
+                                <th>状态</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>ACM编程爱好者社团</td>
+                                <td>加入</td>
+                                <td>已同意</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            </div>
+        </div>
+    </body>
+    <script>
+        $(function () {
+            $.ajax({
+                url:"/cm/student/getInfo",
+                type:"GET",
+                data:{
+                    sid:$.cookie("sid")
+                },
+                async:false,
+                success:function (data) {
+                    $(".sname").html(data.sname);
+                    $(".tele").html(data.tele);
+                    $(".email").html(data.email);
+                    $(".sid").html(data.sid);
+                }
+            });
+
+            $.ajax({
+                url:"/cm/student/getCommunity",
+                type:"GET",
+                data:{
+                    sid:$.cookie("sid")
+                },
+                async:false,
+                success:function (data) {
+                    $(".community tbody tr").remove();
+                    $.each(data,function (i,o) {
+                        var tr = "<tr>" +
+                            "<td>"+o.cname+"</td><td>"+o.ctname+"</td><td>" +
+                            "<button class='quit' onclick=\"javascript:window.location.href='/cm/html/quit.html?cid="+
+                            o.cid+"'\">申请退出</button></td>" +
+                            "</tr>";
+                        $(".table tbody").append(tr);
+                    });
+                }
+            });
+
+            $.ajax({
+                url:"/cm/student/getApplications",
+                type:"GET",
+                data:{
+                    sid:$.cookie("sid")
+                },
+                async:false,
+                success:function (data) {
+                    $(".application tbody tr").remove();
+                    $.each(data, function (i,o) {
+                        var type = "加入";
+                        var status = "未处理";
+                        if(o.type == 1)
+                            type = "退出";
+
+                        if(o.status == "1")
+                            status = "通过";
+                        else if(o.status == "2")
+                            status = "拒绝";
+
+                        var tr = "<tr><td>"+o.cname+"</td><td>"+type+"</td>\<td>"+status+"</td></tr>";
+                        $(".application tbody").append(tr);
+                    })
+                }
+            })
+
+        })
+    </script>
+</html>

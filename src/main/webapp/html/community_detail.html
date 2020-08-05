@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/html">
+    <head>
+        <title>学生社团管理系统-ACM编程爱好者社团</title>
+        <link href="../css/Club.css" rel="stylesheet" type="text/css" />
+        <script src="../js/jquery.min.js"></script>
+        <script src="../js/jquery.cookie.js"></script>
+        <script src="../js/util.js"></script>
+        <meta charset="utf-8">
+    </head>
+
+    <body>
+        <div class="strip1">
+            <span class="logo">
+                <img src="../image/xbdx.jpeg" style="max-width: 200px;">
+            </span>
+<!--            <span class="ctype"></span>-->
+            <input type="button" value="申请加入" class="apply">
+        </div>
+        
+        <div class="strip1">
+            <table class="number">
+                <td class="text">社团人数：</td>
+                <td class="text count"></td>
+            </table>
+
+            <div>
+                <div class="subject">
+                    <div class="titles">社团名称：</div>
+                    <div class="text cname"></div>
+                </div>
+            </div>
+            
+            <div class="block">
+                <div class="span2">
+                    <div class="subject">
+                        <div class="titles">社团简介：</div>
+                        <div class="text cdesc"></div>
+                    </div>
+            
+                    <div class="subject">
+                        <div class="titles">社团特色：</div>
+                        <div class="text cfeature"></div>
+                    </div>
+                </div>
+
+                <div class="span3">
+                    <div class="subject">
+                        <div class="titles">社团公告：</div>
+<!--                        <li class="notice">公告三标题公告三标题公告三标题公告一标题公告一标题公告一标题</li>-->
+                    </div>
+                </div>
+
+                
+            </div>
+        </div>
+    <script>
+        $(function(){
+            $.ajax({
+                url:"/cm/community/get_member_count",
+                type:"GET",
+                async:false,
+                data: {
+                    cid:getParams("cid")
+                },
+                success:function(data){
+                    $(".strip1 .number .count").html(data)
+                }
+            })
+
+            $.ajax({
+                url:"/cm/community/query",
+                type:"GET",
+                async:false,
+                data:{
+                    cid:getParams("cid")
+                },
+                success:function(data){
+                    console.log(data);
+                    $(".ctype").html(data.ctype);
+                    $(".cname").html(data.cname);
+                    $(".cdesc").html(data.cdesc);
+                    $(".cfeature").html(data.cfeature);
+                }
+            })
+
+            $.ajax({
+                url:"/cm/notice/get",
+                type:"GET",
+                data:{
+                    cid:getParams("cid"),
+                },
+                async:false,
+                success:function (data) {
+                    $("li.notice").remove();
+                    $.each(data,function (i,o) {
+                        var li = "<li class=\"notice\"><a>"+o.title+"</a></li>";
+                        $(".span3 .subject").append(li);
+                    })
+                }
+            })
+
+            $(".apply").click(function () {
+                var cid = getParams("cid");
+                if($.cookie("sid")!=null) {
+                    window.location.href = "join.html?cid=" + cid;
+                }else{
+                    window.location.href = "login.html";
+                }
+            })
+        })
+
+
+    </script>
+    </body>
+</html>

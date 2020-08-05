@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="cn.nwu.edu.mapper.ApplicationMapper">
+
+    <insert id="addApplication" parameterType="cn.nwu.edu.entity.Application">
+        insert into application(sid,sname,cid,reason,email,tele) values
+        (#{sid},#{sname},#{cid},#{reason},#{email},#{tele})
+    </insert>
+
+    <select id="getApplication" resultType="cn.nwu.edu.entity.Application">
+        select * from application where cid = #{cid} order by time desc
+    </select>
+    <select id="getStudentApplication" resultType="java.util.HashMap">
+        select application.status,community.cname,application.type from application left join community on application.cid = community.cid where sid = #{sid}
+    </select>
+
+    <insert id="addStudent">
+        insert into student_community(sid, cid) values (#{sid},#{cid});
+    </insert>
+    <update id="yesApplication">
+        update application set status = 1 where cid= #{cid} and sid = #{sid}
+    </update>
+    <update id="noApplication">
+        update application set status = 2 where cid= #{cid} and sid = #{sid}
+    </update>
+    <delete id="deleteStudent">
+        delete from student_community where sid = #{sid} and cid = #{cid}
+    </delete>
+    <update id="exitApplication">
+        update application set status = 1 where cid= #{cid} and sid = #{sid}
+    </update>
+    <update id="refuseApplication">
+        update application set status = 2 where cid= #{cid} and sid = #{sid}
+    </update>
+
+</mapper>
